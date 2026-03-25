@@ -18,15 +18,40 @@ align-items:center;
 
 height:100vh;
 margin:0;
+
+text-shadow:0 0 5px #00ff00;
 }
 
 #terminal{
-width:600px;
+width:700px;
+}
+
+#boot{
+font-size:18px;
+white-space:pre-wrap;
+}
+
+#interface{
+display:none;
+}
+
+button{
+background:black;
+color:#00ff00;
+border:1px solid #00ff00;
+font-family:monospace;
+cursor:pointer;
+margin-right:10px;
+padding:5px 10px;
+}
+
+button:hover{
+background:#003300;
 }
 
 .item{
 cursor:pointer;
-margin:5px 0;
+margin:6px 0;
 }
 
 .item:hover{
@@ -38,6 +63,10 @@ margin-top:20px;
 white-space:pre-wrap;
 }
 
+#path{
+margin:10px 0;
+}
+
 </style>
 
 </head>
@@ -46,7 +75,20 @@ white-space:pre-wrap;
 
 <div id="terminal">
 
-<div id="path">/root</div>
+<div id="boot"></div>
+
+<div id="interface">
+
+<h3>CLASSIFIED RESEARCH DATABASE</h3>
+
+<div>
+
+<button onclick="goBack()">⬅ volver</button>
+<button onclick="goRoot()">🏠 root</button>
+
+</div>
+
+<div id="path"></div>
 
 <div id="files"></div>
 
@@ -54,7 +96,50 @@ white-space:pre-wrap;
 
 </div>
 
+</div>
+
 <script>
+
+/* ---------- BOOT SCREEN ---------- */
+
+const bootText = `
+ACCESSING CLASSIFIED DATABASE...
+DECRYPTING FILES...
+VERIFYING CREDENTIALS...
+
+ACCESS GRANTED
+
+`;
+
+let i=0;
+
+function boot(){
+
+if(i < bootText.length){
+
+document.getElementById("boot").innerHTML += bootText[i];
+
+i++;
+
+setTimeout(boot,30);
+
+}
+else{
+
+document.getElementById("boot").style.display="none";
+
+document.getElementById("interface").style.display="block";
+
+render();
+
+}
+
+}
+
+boot();
+
+
+/* ---------- FILE SYSTEM ---------- */
 
 let path="/";
 
@@ -62,7 +147,10 @@ const filesystem={
 
 "/":[
 {type:"folder",name:"archivos"},
-{type:"folder",name:"notas"}
+{type:"folder",name:"notas"},
+{type:"folder",name:"investigacion"},
+{type:"folder",name:"laboratorio"},
+{type:"folder",name:"easter_eggs"}
 ],
 
 "/archivos":[
@@ -73,44 +161,111 @@ const filesystem={
 
 "/notas":[
 {type:"file",name:"pista.txt"}
+],
+
+"/investigacion":[
+{type:"file",name:"metodo.txt"},
+{type:"file",name:"observacion.txt"}
+],
+
+"/laboratorio":[
+{type:"file",name:"registro_01.txt"},
+{type:"file",name:"registro_02.txt"}
+],
+
+"/easter_eggs":[
+{type:"folder",name:"secreto"},
+{type:"folder",name:"experimento"}
+],
+
+"/easter_eggs/secreto":[
+{type:"file",name:"mensaje_oculto.txt"}
+],
+
+"/easter_eggs/experimento":[
+{type:"file",name:"archivo_x.txt"}
 ]
 
 };
 
+
+/* ---------- FILE CONTENT ---------- */
+
 const files={
 
 "creatividad.txt":
-`¿Qué hace creativo publicar una investigación?
+`PREGUNTA 1
+
+¿Qué hace creativo publicar una investigación?
 
 Publicar una investigación es creativo porque implica
 interpretar información, conectar ideas y generar
 conocimiento nuevo.`,
 
 "sorpresa.txt":
-`¿Por qué sorprende que sea considerado creativo?
+`PREGUNTA 2
+
+¿Por qué sorprende que sea considerado creativo?
 
 Muchas personas creen que investigar es solo aplicar
 métodos técnicos, pero formular preguntas nuevas
 requiere imaginación.`,
 
 "reflexion.txt":
-`¿Tengo yo ese comportamiento?
+`PREGUNTA 3
 
-Cuando aprendo intento no solo repetir información,
-sino también conectar ideas y generar interpretaciones propias.`,
+¿Tengo yo ese comportamiento?
+
+Cuando investigo intento conectar ideas y generar
+interpretaciones propias.`,
 
 "pista.txt":
 `NOTA DEL SISTEMA
 
-Un buen investigador siempre explora más allá
-de lo evidente.
+Un investigador siempre explora más allá de lo evidente.`,
 
-A veces hay información escondida.`
+"metodo.txt":
+`DOCUMENTO DE INVESTIGACIÓN
+
+La creatividad aparece cuando se combinan
+ideas que antes no estaban conectadas.`,
+
+"observacion.txt":
+`OBSERVACIÓN
+
+Investigar implica curiosidad constante.`,
+
+"registro_01.txt":
+`REGISTRO DE LABORATORIO
+
+Experimento de exploración conceptual.`,
+
+"registro_02.txt":
+`REGISTRO DE LABORATORIO
+
+Resultados en análisis.`,
+
+"mensaje_oculto.txt":
+`EASTER EGG
+
+Si encontraste este archivo significa que
+exploraste más allá de lo necesario.
+
+Eso es exactamente lo que hace un investigador.`,
+
+"archivo_x.txt":
+`ARCHIVO EXPERIMENTAL
+
+La curiosidad es el motor de toda investigación.`
+
 };
+
+
+/* ---------- RENDER ---------- */
 
 function render(){
 
-document.getElementById("path").innerText=path;
+document.getElementById("path").innerText="Ruta actual: "+path;
 
 let container=document.getElementById("files");
 
@@ -129,6 +284,8 @@ div.innerText="📁 "+item.name;
 div.onclick=()=>{
 
 path=(path=="/"?"/"+item.name:path+"/"+item.name);
+
+document.getElementById("content").innerText="";
 
 render();
 
@@ -154,10 +311,36 @@ container.appendChild(div);
 
 }
 
+
+/* ---------- NAVIGATION ---------- */
+
+function goBack(){
+
+if(path=="/") return;
+
+let parts=path.split("/");
+
+parts.pop();
+
+path=parts.join("/") || "/";
+
+document.getElementById("content").innerText="";
+
 render();
+
+}
+
+function goRoot(){
+
+path="/";
+
+document.getElementById("content").innerText="";
+
+render();
+
+}
 
 </script>
 
 </body>
-
 </html>
