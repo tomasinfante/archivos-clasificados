@@ -179,10 +179,10 @@ const filesystem={
 ],
 
 "/laboratorio":[
-{type:"pdf",name:"creatividad_investigacion.pdf"},
-{type:"pdf",name:"procesos_cognitivos.pdf"},
-{type:"pdf",name:"metodo_cientifico.pdf"},
-{type:"pdf",name:"interpretacion_datos.pdf"}
+{type:"pdf",name:"Clase_2_Mitos_Creatividad.pdf",label:"Clase 2 — Mitos de la creatividad"},
+{type:"pdf",name:"Clase_3_La_Mente_Creativa.pdf",label:"Clase 3 — La mente creativa"},
+{type:"pdf",name:"Clase_4_Creatividad_En_La_Vida_Diaria.pdf",label:"Clase 4 — Creatividad en la vida diaria"},
+{type:"pdf",name:"Clase_5_ADN_Del_Innovador.pdf",label:"Clase 5 — ADN del innovador"}
 ],
 
 "/notas":[
@@ -329,33 +329,24 @@ introduce el año de nacimiento de Ada Lovelace.`,
 Instalación militar en Nevada asociada a pruebas
 experimentales de aeronaves.
 
-Muchos documentos siguen clasificados.
-
-Proyecto identificado como ███████████.`,
+Muchos documentos siguen clasificados.`,
 
 "documento.txt":
 `MK ULTRA
 
 Programa real de la CIA iniciado en los años 50
-para investigar técnicas de control mental.
-
-Gran parte de los documentos fueron destruidos en 1973.`,
+para investigar técnicas de control mental.`,
 
 "incidente.txt":
 `INCIDENTE DE ROSWELL – 1947
 
-Un objeto desconocido se estrelló en Nuevo México.
-
-La explicación oficial posterior fue
-un globo del proyecto █████.`,
+Un objeto desconocido se estrelló en Nuevo México.`,
 
 "informe.txt":
 `MANHATTAN PROJECT
 
 Proyecto secreto de EE.UU. durante la Segunda Guerra Mundial
-para desarrollar la primera bomba atómica.
-
-Director científico: J. Robert Oppenheimer.`
+para desarrollar la primera bomba atómica.`
 
 };
 
@@ -419,7 +410,7 @@ document.getElementById("content").innerText=files[item.name];
 
 if(item.type==="pdf"){
 
-div.innerText="📑 "+item.name;
+div.innerText="📑 "+item.label;
 
 div.onclick=()=>{
 window.open(item.name,"_blank");
