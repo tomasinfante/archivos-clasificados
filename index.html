@@ -6,86 +6,104 @@
 <title>CLASSIFIED RESEARCH DATABASE</title>
 
 <style>
-
 body {
+  background: black;
+  color: #00ff00;
+  font-family: monospace;
+  margin: 0;
+  text-shadow: 0 0 5px #00ff00;
+  font-size: 18px;
+
   display: flex;
-  justify-content: center;      /* centrado horizontal solo */
-  align-items: flex-start;      /* empieza desde arriba, no corta */
-  min-height: 100vh;            /* mínimo alto igual a pantalla */
-  overflow-y: auto;             /* permite scroll vertical en toda la página */
+  justify-content: center;      /* centrado horizontal */
+  align-items: flex-start;      /* empieza desde arriba */
+  min-height: 100vh;            /* al menos pantalla completa */
+  overflow-y: auto;             /* scroll vertical si el contenido crece */
   padding-top: 20px;
   padding-bottom: 40px;
 }
-  
+
 #terminal {
   width: 1000px;
   max-width: 90vw;
-  height: auto;   /* crecer con el contenido */
-}
-#boot{
-white-space:pre-wrap;
-}
-
-#interface{
-display:none;
+  height: auto;                 /* crece con el contenido */
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
 }
 
-#explorer{
-display:flex;
-gap:40px;
-margin-top:20px;
-align-items:flex-start;
+#boot {
+  white-space: pre-wrap;
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
 }
 
-#files{
-width:320px;
-border-right:1px solid #00ff00;
-padding-right:20px;
+#interface {
+  display: none;
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+#explorer {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+  align-items: flex-start;
+}
+
+#files {
+  width: 320px;
+  border-right: 1px solid #00ff00;
+  padding-right: 20px;
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
 }
 
 #content {
   flex: 1;
   white-space: pre-wrap;
   min-height: 320px;
-  max-height: 80vh;     /* límite alto para mantener scroll interno */
-  overflow-y: auto;     /* scroll interno si el archivo es largo */
+  max-height: 80vh;         /* scroll interno si archivo largo */
+  overflow-y: auto;
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+  background: black;         /* mantener fondo negro */
+  padding-right: 10px;       /* un poquito de espacio para scroll */
 }
 
-button{
-background:black;
-color:#00ff00;
-border:1px solid #00ff00;
-font-family:monospace;
-cursor:pointer;
-margin-right:10px;
-padding:6px 12px;
-font-size:16px;
+button {
+  background: black;
+  color: #00ff00;
+  border: 1px solid #00ff00;
+  font-family: monospace;
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 6px 12px;
+  font-size: 16px;
 }
 
-button:hover{
-background:#003300;
+button:hover {
+  background: #003300;
 }
 
-.item{
-cursor:pointer;
-margin:8px 0;
-font-size:18px;
+.item {
+  cursor: pointer;
+  margin: 8px 0;
+  font-size: 18px;
 }
 
-.item:hover{
-text-decoration:underline;
+.item:hover {
+  text-decoration: underline;
 }
 
-.secret{
-color:#ff5555;
-font-weight:bold;
-text-shadow:0 0 4px #ff0000;
+.secret {
+  color: #ff5555;
+  font-weight: bold;
+  text-shadow: 0 0 4px #ff0000;
 }
 
-#path{
-margin:10px 0;
+#path {
+  margin: 10px 0;
 }
-
 </style>
 
 </head>
