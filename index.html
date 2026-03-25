@@ -79,16 +79,11 @@ text-decoration:underline;
 
 .secret{
 color:#ff4444;
+font-weight:bold;
 }
 
 #path{
 margin:10px 0;
-}
-
-.redacted{
-background:#00ff00;
-color:black;
-padding:0 4px;
 }
 
 </style>
@@ -123,7 +118,7 @@ padding:0 4px;
 
 <script>
 
-/* BOOT */
+/* BOOT SCREEN */
 
 const bootText = `
 ACCESSING CLASSIFIED DATABASE...
@@ -280,7 +275,8 @@ Muchos historiadores la consideran la primera programadora.
 
 Para acceder al archivo clasificado
 introduce el año de nacimiento de Ada Lovelace.`,
-"infromacion.txt":
+
+"informacion.txt":
 `AREA 51
 
 Instalación militar en Nevada asociada a pruebas
@@ -347,7 +343,7 @@ div.classList.add("secret");
 div.innerText="🔒 "+item.name;
 }
 
-if(item.type==="folder" && item.name!=="top_secret"){
+else if(item.type==="folder"){
 div.innerText="📁 "+item.name;
 }
 
@@ -360,13 +356,8 @@ if(item.name==="top_secret"){
 let pass=prompt("ACCESS RESTRICTED\nEnter password:");
 
 if(pass!=="1815"){
-
 alert("ACCESS DENIED\nHint: revisa la carpeta NOTAS.");
-
 return;
-
-}
-
 }
 
 }
@@ -386,9 +377,7 @@ if(item.type==="file"){
 div.innerText="📄 "+item.name;
 
 div.onclick=()=>{
-
 document.getElementById("content").innerText=files[item.name];
-
 };
 
 }
