@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html>
 
@@ -12,14 +11,11 @@ body{
 background:black;
 color:#00ff00;
 font-family:monospace;
-
 display:flex;
 justify-content:center;
 align-items:center;
-
 height:100vh;
 margin:0;
-
 text-shadow:0 0 5px #00ff00;
 font-size:18px;
 }
@@ -53,7 +49,7 @@ padding-right:20px;
 #content{
 flex:1;
 white-space:pre-wrap;
-min-height:300px;
+min-height:320px;
 }
 
 button{
@@ -81,8 +77,18 @@ font-size:18px;
 text-decoration:underline;
 }
 
+.secret{
+color:#ff4444;
+}
+
 #path{
 margin:10px 0;
+}
+
+.redacted{
+background:#00ff00;
+color:black;
+padding:0 4px;
 }
 
 </style>
@@ -107,11 +113,8 @@ margin:10px 0;
 <div id="path"></div>
 
 <div id="explorer">
-
 <div id="files"></div>
-
 <div id="content"></div>
-
 </div>
 
 </div>
@@ -120,7 +123,7 @@ margin:10px 0;
 
 <script>
 
-/* BOOT SCREEN */
+/* BOOT */
 
 const bootText = `
 ACCESSING CLASSIFIED DATABASE...
@@ -128,7 +131,6 @@ DECRYPTING FILES...
 VERIFYING CREDENTIALS...
 
 ACCESS GRANTED
-
 `;
 
 let i=0;
@@ -138,18 +140,14 @@ function boot(){
 if(i < bootText.length){
 
 document.getElementById("boot").innerHTML += bootText[i];
-
 i++;
-
 setTimeout(boot,25);
 
 }
 else{
 
 document.getElementById("boot").style.display="none";
-
 document.getElementById("interface").style.display="block";
-
 render();
 
 }
@@ -170,7 +168,7 @@ const filesystem={
 {type:"folder",name:"investigacion"},
 {type:"folder",name:"laboratorio"},
 {type:"folder",name:"notas"},
-{type:"folder",name:"easter_eggs"}
+{type:"folder",name:"top_secret"}
 ],
 
 "/archivos":[
@@ -193,17 +191,27 @@ const filesystem={
 {type:"file",name:"pista.txt"}
 ],
 
-"/easter_eggs":[
-{type:"folder",name:"secreto"},
-{type:"folder",name:"experimento"}
+"/top_secret":[
+{type:"folder",name:"area_51"},
+{type:"folder",name:"mk_ultra"},
+{type:"folder",name:"roswell"},
+{type:"folder",name:"manhattan_project"}
 ],
 
-"/easter_eggs/secreto":[
-{type:"file",name:"mensaje_oculto.txt"}
+"/top_secret/area_51":[
+{type:"file",name:"archivo.txt"}
 ],
 
-"/easter_eggs/experimento":[
-{type:"file",name:"archivo_x.txt"}
+"/top_secret/mk_ultra":[
+{type:"file",name:"documento.txt"}
+],
+
+"/top_secret/roswell":[
+{type:"file",name:"incidente.txt"}
+],
+
+"/top_secret/manhattan_project":[
+{type:"file",name:"informe.txt"}
 ]
 
 };
@@ -218,35 +226,38 @@ const files={
 
 ¿Qué hace creativo publicar una investigación?
 
-Publicar una investigación es creativo porque implica interpretar información, conectar ideas y generar conocimiento nuevo.
-
-No se trata solo de repetir datos, sino de formular preguntas y producir nuevas interpretaciones.`,
+Publicar una investigación es creativo porque implica interpretar información,
+conectar ideas y generar conocimiento nuevo.`,
 
 "sorpresa.txt":
 `PREGUNTA 2
 
 ¿Por qué sorprende que sea considerado creativo?
 
-Muchas personas asocian la investigación únicamente con métodos técnicos.
-
-Sin embargo, formular nuevas preguntas y descubrir conexiones inesperadas requiere imaginación.`,
+Muchas personas piensan que investigar es solo aplicar métodos.
+Sin embargo formular nuevas preguntas requiere imaginación.`,
 
 "reflexion.txt":
 `PREGUNTA 3
 
 ¿Tengo yo ese comportamiento?
 
-Cuando investigo intento no solo comprender información existente, sino también relacionar ideas y generar interpretaciones propias.`,
+Intento conectar ideas y formular interpretaciones propias
+cuando investigo.`,
 
 "metodo.txt":
 `DOCUMENTO DE INVESTIGACIÓN
 
-La creatividad aparece cuando diferentes ideas se conectan para producir nuevas explicaciones.`,
+La creatividad aparece cuando distintas ideas
+se conectan para generar nuevas explicaciones.`,
 
 "observacion.txt":
 `OBSERVACIÓN
 
-La curiosidad es el motor fundamental de toda investigación.`,
+Los primeros algoritmos no fueron escritos
+para computadores electrónicos.
+
+Fueron imaginados por Ada Lovelace.`,
 
 "registro_01.txt":
 `REGISTRO DE LABORATORIO
@@ -256,24 +267,64 @@ Exploración conceptual inicial.`,
 "registro_02.txt":
 `REGISTRO DE LABORATORIO
 
-Resultados preliminares en análisis.`,
+Resultados preliminares.`,
 
 "pista.txt":
 `NOTA DEL SISTEMA
 
-Un buen investigador explora más allá de lo evidente.`,
+En toda investigación hay figuras fundamentales.
 
-"mensaje_oculto.txt":
-`EASTER EGG
+Una de las primeras personas en imaginar una máquina
+capaz de procesar información mucho antes de que existieran
+los computadores modernos.
 
-Si encontraste este archivo significa que exploraste más allá de lo necesario.
+Su trabajo inspiró la programación.
 
-Eso es exactamente lo que hace un investigador.`,
+Para acceder al archivo clasificado
+introduce el año de su nacimiento.`,
 
-"archivo_x.txt":
-`ARCHIVO EXPERIMENTAL
+"archivo.txt":
+`AREA 51
 
-La curiosidad es el motor de toda investigación.`
+Instalación militar en Nevada asociada a pruebas
+experimentales de aeronaves.
+
+Muchos documentos siguen clasificados.
+
+Proyecto identificado como ███████████.`,
+
+"documento.txt":
+`MK ULTRA
+
+Programa real de la CIA iniciado en los años 50
+para investigar técnicas de control mental.
+
+Gran parte de los documentos fueron destruidos en 1973.
+
+Sujetos experimentales: █████████.`,
+
+"incidente.txt":
+`INCIDENTE DE ROSWELL – 1947
+
+Un objeto desconocido se estrelló en Nuevo México.
+
+El ejército declaró inicialmente haber recuperado
+un "disco volador".
+
+La explicación oficial posterior fue
+un globo del proyecto █████.`,
+
+"informe.txt":
+`MANHATTAN PROJECT
+
+Proyecto secreto de EE.UU. durante la Segunda Guerra Mundial
+para desarrollar la primera bomba atómica.
+
+Director científico: J. Robert Oppenheimer.
+
+Localización principal: Los Álamos.
+
+Partes del proyecto siguen clasificadas █████.`
 
 };
 
@@ -294,11 +345,32 @@ let div=document.createElement("div");
 
 div.className="item";
 
+if(item.name==="top_secret"){
+div.classList.add("secret");
+div.innerText="🔒 "+item.name;
+}
+
+if(item.type==="folder" && item.name!=="top_secret"){
+div.innerText="📁 "+item.name;
+}
+
 if(item.type==="folder"){
 
-div.innerText="📁 "+item.name;
-
 div.onclick=()=>{
+
+if(item.name==="top_secret"){
+
+let pass=prompt("ACCESS RESTRICTED\nEnter password:");
+
+if(pass!=="1815"){
+
+alert("ACCESS DENIED\nPassword format: YYYY");
+
+return;
+
+}
+
+}
 
 path=(path=="/"?"/"+item.name:path+"/"+item.name);
 
@@ -362,4 +434,3 @@ render();
 </body>
 
 </html>
-```
