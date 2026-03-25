@@ -9,18 +9,19 @@
 
 body {
   display: flex;
-  justify-content: center;  /* centrado horizontal */
-  align-items: flex-start;  /* empieza desde arriba, no corta */
-  min-height: 100vh;        /* mínimo alto igual a pantalla */
-  overflow-y: auto;         /* permite scroll vertical en toda la página */
-  padding-top: 20px;        /* margen arriba opcional */
-  padding-bottom: 40px;     /* margen abajo opcional */
+  justify-content: center;      /* centrado horizontal solo */
+  align-items: flex-start;      /* empieza desde arriba, no corta */
+  min-height: 100vh;            /* mínimo alto igual a pantalla */
+  overflow-y: auto;             /* permite scroll vertical en toda la página */
+  padding-top: 20px;
+  padding-bottom: 40px;
 }
-
+  
 #terminal {
-  height: auto;             /* crece con el contenido */
+  width: 1000px;
+  max-width: 90vw;
+  height: auto;   /* crecer con el contenido */
 }
-
 #boot{
 white-space:pre-wrap;
 }
@@ -42,10 +43,12 @@ border-right:1px solid #00ff00;
 padding-right:20px;
 }
 
-#content{
-flex:1;
-white-space:pre-wrap;
-min-height:320px;
+#content {
+  flex: 1;
+  white-space: pre-wrap;
+  min-height: 320px;
+  max-height: 80vh;     /* límite alto para mantener scroll interno */
+  overflow-y: auto;     /* scroll interno si el archivo es largo */
 }
 
 button{
