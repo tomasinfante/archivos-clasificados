@@ -3,7 +3,7 @@
 
 <head>
 
-<title>RESTRICTED RESEARCH DATABASE</title>
+<title>CLASSIFIED RESEARCH DATABASE</title>
 
 <style>
 
@@ -99,7 +99,7 @@ margin:10px 0;
 
 <div id="interface">
 
-<h2>RESTRICTED RESEARCH DATABASE</h2>
+<h2>CLASSIFIED RESEARCH DATABASE</h2>
 
 <div>
 <button onclick="goBack()">⬅ volver</button>
@@ -119,10 +119,10 @@ margin:10px 0;
 
 <script>
 
-/* BOOT */
+/* BOOT SCREEN */
 
 const bootText = `
-ACCESSING RESEARCH DATABASE...
+ACCESSING CLASSIFIED DATABASE...
 DECRYPTING FILES...
 VERIFYING CREDENTIALS...
 
@@ -153,7 +153,6 @@ render();
 boot();
 
 
-
 /* FILE SYSTEM */
 
 let path="/";
@@ -179,10 +178,10 @@ const filesystem={
 ],
 
 "/laboratorio":[
-{type:"pdf",name:"Clase_2_Mitos_Creatividad.pdf",label:"Clase 2 — Mitos de la creatividad"},
-{type:"pdf",name:"Clase_3_La_Mente_Creativa.pdf",label:"Clase 3 — La mente creativa"},
-{type:"pdf",name:"Clase_4_Creatividad_En_La_Vida_Diaria.pdf",label:"Clase 4 — Creatividad en la vida diaria"},
-{type:"pdf",name:"Clase_5_ADN_Del_Innovador.pdf",label:"Clase 5 — ADN del innovador"}
+{type:"pdf",label:"Clase 2 — Mitos de la creatividad",name:"Clase_2_Mitos_Creatividad.pdf"},
+{type:"pdf",label:"Clase 3 — La mente creativa",name:"Clase_3_La_Mente_Creativa.pdf"},
+{type:"pdf",label:"Clase 4 — Creatividad en la vida diaria",name:"Clase_4_Creatividad_En_La_Vida_Diaria.pdf"},
+{type:"pdf",label:"Clase 5 — ADN del innovador",name:"Clase_5_ADN_Del_Innovador.pdf"}
 ],
 
 "/notas":[
@@ -215,7 +214,6 @@ const filesystem={
 };
 
 
-
 /* FILE CONTENT */
 
 const files={
@@ -226,130 +224,123 @@ const files={
 ¿Qué hace creativo publicar una investigación?
 
 Publicar una investigación es creativo porque no consiste
-solo en aplicar un método o seguir una serie de pasos
-predefinidos.
+solo en aplicar un método.
 
 Durante el proceso el investigador debe interpretar
-información, relacionar conceptos provenientes de
-distintas fuentes y construir una explicación coherente
-a partir de ellos.
+información, relacionar conceptos y construir una
+explicación coherente.
 
-Para lograrlo intervienen distintos procesos cognitivos.
+En este proceso intervienen memoria, atención
+y control cognitivo.
 
-La memoria permite recuperar conocimientos previos,
-teorías y lecturas anteriores que sirven como base
-para interpretar la nueva información.
+La memoria permite recuperar teorías y conocimientos previos.
 
-La atención permite seleccionar qué elementos de toda
-la información disponible son relevantes para el
-problema que se está investigando.
+La atención permite seleccionar qué elementos son relevantes.
 
-El control cognitivo permite evaluar distintas
-interpretaciones posibles, descartar las menos
-consistentes y organizar las ideas de manera lógica.`,
+El control cognitivo permite evaluar interpretaciones
+y organizar las ideas.`,
 
 "sorpresa.txt":
 `PREGUNTA 2
 
 ¿Por qué sorprendió que fuera considerado creativo?
 
-Resulta sorprendente porque muchas veces la investigación
-se percibe como un proceso técnico o mecánico.
+Muchas veces la investigación se percibe como
+un proceso técnico o mecánico.
 
-Sin embargo, al analizar el proceso completo se observa
-que formular preguntas, elegir interpretaciones y
-relacionar conceptos requiere imaginación y pensamiento
-crítico.
+Sin embargo, formular preguntas, elegir
+interpretaciones y relacionar conceptos
+requiere imaginación y pensamiento crítico.
 
-Por eso puede considerarse una forma de creatividad
-intelectual.`,
+Por eso puede considerarse una forma de
+creatividad intelectual.`,
 
 "reflexion.txt":
 `PREGUNTA 3
 
 ¿Tengo yo ese comportamiento?
 
-Gran parte de mi carrera está orientada a investigar 
-y eventualmente publicar resultados. Sin embargo, 
-siempre entendí ese proceso principalmente como una 
-actividad metodológica: formular un problema, aplicar 
-un método y analizar resultados.
+Gran parte de mi formación académica se orienta
+hacia la investigación y la posible publicación
+de resultados.
 
-Por esta razón nunca había pensado la investigación
-como una actividad particularmente creativa.
+Durante mucho tiempo entendí ese proceso como
+una actividad principalmente metodológica.
 
-Pero, luego de analizarlo, resulta evidente que 
-investigar también implica interpretar información, 
-seleccionar qué ideas son relevantes y conectar 
-conceptos provenientes de distintas fuentes.
+Sin embargo, al analizarlo con mayor detalle
+resulta evidente que investigar también implica
+interpretar datos, conectar ideas y construir
+explicaciones nuevas.
 
-En ese sentido, reconozco que sí he tenido ese
-comportamiento durante mi propio proceso de trabajo, 
+En ese sentido reconozco que sí he tenido ese
+comportamiento durante mi propio trabajo,
 aunque anteriormente no lo identificaba
 como una forma de creatividad.`,
 
 "metodo.txt":
 `DOCUMENTO METODOLÓGICO
 
-En el proceso de publicar una investigación suele
-asumirse que el investigador simplemente aplica un
-método para obtener resultados objetivos.
+En el proceso de publicar una investigación
+muchas veces es necesario distanciarse de
+las percepciones iniciales.
 
-Sin embargo, en muchas ocasiones el trabajo requiere
-desvincularse de percepciones o intuiciones previas
-y atender únicamente a los datos, modelos o ecuaciones
-que emergen del análisis.
+El investigador debe enfrentarse a los datos
+o ecuaciones tal como aparecen.
 
-Este distanciamiento obliga al investigador a dejar
-de lado interpretaciones iniciales y enfrentarse a
-los resultados tal como aparecen.
+Este distanciamiento obliga a replantear
+interpretaciones previas.
 
-Paradójicamente, este proceso puede abrir un espacio
-para la creatividad, ya que comprender o interpretar
-datos inesperados requiere reformular preguntas,
-explorar nuevas relaciones conceptuales y construir
-explicaciones que no estaban previstas al inicio
-de la investigación.`,
+Paradójicamente este proceso puede abrir
+espacios para la creatividad al exigir
+nuevas formas de comprender los resultados.`,
 
 "pista.txt":
 `NOTA DEL SISTEMA
 
-Ada Lovelace es considerada una de las primeras personas
-en imaginar cómo una máquina podría ejecutar algoritmos,
-mucho antes de la existencia de los computadores modernos.
+Ada Lovelace fue una de las primeras personas
+en imaginar cómo una máquina podía ejecutar
+algoritmos.
 
-Muchos historiadores la consideran la primera programadora.
+Muchos historiadores la consideran la primera
+programadora.
 
-Para acceder al archivo clasificado
+Para acceder a los archivos clasificados
 introduce el año de nacimiento de Ada Lovelace.`,
 
 "informacion.txt":
 `AREA 51
 
-Instalación militar en Nevada asociada a pruebas
+Instalación militar asociada a pruebas
 experimentales de aeronaves.
 
-Muchos documentos siguen clasificados.`,
+Proyecto identificado como █████████.`,
 
 "documento.txt":
 `MK ULTRA
 
 Programa real de la CIA iniciado en los años 50
-para investigar técnicas de control mental.`,
+para investigar técnicas de control mental.
+
+Gran parte de los documentos fueron destruidos.`,
 
 "incidente.txt":
 `INCIDENTE DE ROSWELL – 1947
 
-Un objeto desconocido se estrelló en Nuevo México.`,
+Objeto desconocido recuperado en Nuevo México.
+
+La explicación oficial posterior fue
+un globo del proyecto █████.`,
 
 "informe.txt":
 `MANHATTAN PROJECT
 
-Proyecto secreto de EE.UU. durante la Segunda Guerra Mundial
-para desarrollar la primera bomba atómica.`
+Proyecto secreto para desarrollar la
+primera bomba atómica.
+
+Director científico:
+J. Robert Oppenheimer.`
 
 };
-
 
 
 /* RENDER */
