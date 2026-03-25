@@ -7,24 +7,18 @@
 
 <style>
 
-body{
-background:black;
-color:#00ff00;
-font-family:monospace;
-display:flex;
-justify-content:center;
-align-items:flex-start;
-min-height:100vh;
-margin:0;
-text-shadow:0 0 5px #00ff00;
-font-size:18px;
-overflow-y:auto;
-padding-top:40px;
+body {
+  display: flex;
+  justify-content: center;  /* centrado horizontal */
+  align-items: flex-start;  /* empieza desde arriba, no corta */
+  min-height: 100vh;        /* mínimo alto igual a pantalla */
+  overflow-y: auto;         /* permite scroll vertical en toda la página */
+  padding-top: 20px;        /* margen arriba opcional */
+  padding-bottom: 40px;     /* margen abajo opcional */
 }
 
-#terminal{
-width:1000px;
-max-width:90vw;
+#terminal {
+  height: auto;             /* crece con el contenido */
 }
 
 #boot{
