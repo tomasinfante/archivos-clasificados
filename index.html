@@ -199,7 +199,7 @@ const filesystem={
 ],
 
 "/top_secret/area_51":[
-{type:"file",name:"archivo.txt"}
+{type:"file",name:"informacion.txt"}
 ],
 
 "/top_secret/mk_ultra":[
@@ -272,18 +272,15 @@ Resultados preliminares.`,
 "pista.txt":
 `NOTA DEL SISTEMA
 
-En toda investigación hay figuras fundamentales.
+Ada Lovelace es considerada una de las primeras personas
+en imaginar cómo una máquina podría ejecutar algoritmos,
+mucho antes de la existencia de los computadores modernos.
 
-Una de las primeras personas en imaginar una máquina
-capaz de procesar información mucho antes de que existieran
-los computadores modernos.
-
-Su trabajo inspiró la programación.
+Muchos historiadores la consideran la primera programadora.
 
 Para acceder al archivo clasificado
-introduce el año de su nacimiento.`,
-
-"archivo.txt":
+introduce el año de nacimiento de Ada Lovelace.`,
+"infromacion.txt":
 `AREA 51
 
 Instalación militar en Nevada asociada a pruebas
@@ -364,9 +361,11 @@ let pass=prompt("ACCESS RESTRICTED\nEnter password:");
 
 if(pass!=="1815"){
 
-alert("ACCESS DENIED\nPassword format: YYYY");
+alert("ACCESS DENIED\nHint: revisa la carpeta NOTAS.");
 
 return;
+
+}
 
 }
 
