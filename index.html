@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html>
 
 <head>
 
-<title>CLASSIFIED DATABASE</title>
+<title>CLASSIFIED RESEARCH DATABASE</title>
 
 <style>
 
@@ -20,19 +21,39 @@ height:100vh;
 margin:0;
 
 text-shadow:0 0 5px #00ff00;
+font-size:18px;
 }
 
 #terminal{
-width:700px;
+width:1000px;
+max-width:90vw;
 }
 
 #boot{
-font-size:18px;
 white-space:pre-wrap;
 }
 
 #interface{
 display:none;
+}
+
+#explorer{
+display:flex;
+gap:40px;
+margin-top:20px;
+align-items:flex-start;
+}
+
+#files{
+width:320px;
+border-right:1px solid #00ff00;
+padding-right:20px;
+}
+
+#content{
+flex:1;
+white-space:pre-wrap;
+min-height:300px;
 }
 
 button{
@@ -42,7 +63,8 @@ border:1px solid #00ff00;
 font-family:monospace;
 cursor:pointer;
 margin-right:10px;
-padding:5px 10px;
+padding:6px 12px;
+font-size:16px;
 }
 
 button:hover{
@@ -51,16 +73,12 @@ background:#003300;
 
 .item{
 cursor:pointer;
-margin:6px 0;
+margin:8px 0;
+font-size:18px;
 }
 
 .item:hover{
 text-decoration:underline;
-}
-
-.file{
-margin-top:20px;
-white-space:pre-wrap;
 }
 
 #path{
@@ -79,20 +97,22 @@ margin:10px 0;
 
 <div id="interface">
 
-<h3>CLASSIFIED RESEARCH DATABASE</h3>
+<h2>CLASSIFIED RESEARCH DATABASE</h2>
 
 <div>
-
 <button onclick="goBack()">⬅ volver</button>
 <button onclick="goRoot()">🏠 root</button>
-
 </div>
 
 <div id="path"></div>
 
+<div id="explorer">
+
 <div id="files"></div>
 
-<div id="content" class="file"></div>
+<div id="content"></div>
+
+</div>
 
 </div>
 
@@ -100,7 +120,7 @@ margin:10px 0;
 
 <script>
 
-/* ---------- BOOT SCREEN ---------- */
+/* BOOT SCREEN */
 
 const bootText = `
 ACCESSING CLASSIFIED DATABASE...
@@ -121,7 +141,7 @@ document.getElementById("boot").innerHTML += bootText[i];
 
 i++;
 
-setTimeout(boot,30);
+setTimeout(boot,25);
 
 }
 else{
@@ -139,7 +159,7 @@ render();
 boot();
 
 
-/* ---------- FILE SYSTEM ---------- */
+/* FILE SYSTEM */
 
 let path="/";
 
@@ -147,9 +167,9 @@ const filesystem={
 
 "/":[
 {type:"folder",name:"archivos"},
-{type:"folder",name:"notas"},
 {type:"folder",name:"investigacion"},
 {type:"folder",name:"laboratorio"},
+{type:"folder",name:"notas"},
 {type:"folder",name:"easter_eggs"}
 ],
 
@@ -157,10 +177,6 @@ const filesystem={
 {type:"file",name:"creatividad.txt"},
 {type:"file",name:"sorpresa.txt"},
 {type:"file",name:"reflexion.txt"}
-],
-
-"/notas":[
-{type:"file",name:"pista.txt"}
 ],
 
 "/investigacion":[
@@ -171,6 +187,10 @@ const filesystem={
 "/laboratorio":[
 {type:"file",name:"registro_01.txt"},
 {type:"file",name:"registro_02.txt"}
+],
+
+"/notas":[
+{type:"file",name:"pista.txt"}
 ],
 
 "/easter_eggs":[
@@ -189,7 +209,7 @@ const filesystem={
 };
 
 
-/* ---------- FILE CONTENT ---------- */
+/* FILE CONTENT */
 
 const files={
 
@@ -198,58 +218,55 @@ const files={
 
 ¿Qué hace creativo publicar una investigación?
 
-Publicar una investigación es creativo porque implica
-interpretar información, conectar ideas y generar
-conocimiento nuevo.`,
+Publicar una investigación es creativo porque implica interpretar información, conectar ideas y generar conocimiento nuevo.
+
+No se trata solo de repetir datos, sino de formular preguntas y producir nuevas interpretaciones.`,
 
 "sorpresa.txt":
 `PREGUNTA 2
 
 ¿Por qué sorprende que sea considerado creativo?
 
-Muchas personas creen que investigar es solo aplicar
-métodos técnicos, pero formular preguntas nuevas
-requiere imaginación.`,
+Muchas personas asocian la investigación únicamente con métodos técnicos.
+
+Sin embargo, formular nuevas preguntas y descubrir conexiones inesperadas requiere imaginación.`,
 
 "reflexion.txt":
 `PREGUNTA 3
 
 ¿Tengo yo ese comportamiento?
 
-Cuando investigo intento conectar ideas y generar
-interpretaciones propias.`,
-
-"pista.txt":
-`NOTA DEL SISTEMA
-
-Un investigador siempre explora más allá de lo evidente.`,
+Cuando investigo intento no solo comprender información existente, sino también relacionar ideas y generar interpretaciones propias.`,
 
 "metodo.txt":
 `DOCUMENTO DE INVESTIGACIÓN
 
-La creatividad aparece cuando se combinan
-ideas que antes no estaban conectadas.`,
+La creatividad aparece cuando diferentes ideas se conectan para producir nuevas explicaciones.`,
 
 "observacion.txt":
 `OBSERVACIÓN
 
-Investigar implica curiosidad constante.`,
+La curiosidad es el motor fundamental de toda investigación.`,
 
 "registro_01.txt":
 `REGISTRO DE LABORATORIO
 
-Experimento de exploración conceptual.`,
+Exploración conceptual inicial.`,
 
 "registro_02.txt":
 `REGISTRO DE LABORATORIO
 
-Resultados en análisis.`,
+Resultados preliminares en análisis.`,
+
+"pista.txt":
+`NOTA DEL SISTEMA
+
+Un buen investigador explora más allá de lo evidente.`,
 
 "mensaje_oculto.txt":
 `EASTER EGG
 
-Si encontraste este archivo significa que
-exploraste más allá de lo necesario.
+Si encontraste este archivo significa que exploraste más allá de lo necesario.
 
 Eso es exactamente lo que hace un investigador.`,
 
@@ -261,7 +278,7 @@ La curiosidad es el motor de toda investigación.`
 };
 
 
-/* ---------- RENDER ---------- */
+/* RENDER */
 
 function render(){
 
@@ -312,7 +329,7 @@ container.appendChild(div);
 }
 
 
-/* ---------- NAVIGATION ---------- */
+/* NAVIGATION */
 
 function goBack(){
 
@@ -343,4 +360,6 @@ render();
 </script>
 
 </body>
+
 </html>
+```
