@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>CLASSIFIED TERMINAL</title>
+
+<title>CLASSIFIED DATABASE</title>
 
 <style>
 
@@ -9,20 +11,31 @@ body{
 background:black;
 color:#00ff00;
 font-family:monospace;
-padding:20px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+height:100vh;
+margin:0;
 }
 
 #terminal{
-white-space:pre-wrap;
+width:600px;
 }
 
-input{
-background:black;
-color:#00ff00;
-border:none;
-outline:none;
-font-family:monospace;
-width:80%;
+.item{
+cursor:pointer;
+margin:5px 0;
+}
+
+.item:hover{
+text-decoration:underline;
+}
+
+.file{
+margin-top:20px;
+white-space:pre-wrap;
 }
 
 </style>
@@ -32,15 +45,14 @@ width:80%;
 <body>
 
 <div id="terminal">
-INITIALIZING CLASSIFIED DATABASE...
 
-ACCESS LEVEL: RESEARCHER
+<div id="path">/root</div>
 
-type "help" to see commands
+<div id="files"></div>
+
+<div id="content" class="file"></div>
 
 </div>
-
-> <input id="input" autofocus>
 
 <script>
 
@@ -48,190 +60,104 @@ let path="/";
 
 const filesystem={
 
-"/":["archivos","notas",".oculto"],
+"/":[
+{type:"folder",name:"archivos"},
+{type:"folder",name:"notas"}
+],
 
-"/archivos":["creatividad.txt","sorpresa.txt","reflexion.txt"],
+"/archivos":[
+{type:"file",name:"creatividad.txt"},
+{type:"file",name:"sorpresa.txt"},
+{type:"file",name:"reflexion.txt"}
+],
 
-"/notas":["pista.txt"],
-
-"/.oculto":["easteregg.txt"]
+"/notas":[
+{type:"file",name:"pista.txt"}
+]
 
 };
 
 const files={
 
 "creatividad.txt":
+`¿Qué hace creativo publicar una investigación?
 
-`PREGUNTA 1
-¿Qué hace creativo publicar una investigación?
-
-Publicar una investigación es creativo porque no se trata solo
-de repetir información existente, sino de interpretar datos,
-conectar ideas y generar conocimiento nuevo.
-
-El proceso de investigación implica formular preguntas,
-explorar posibilidades y comunicar descubrimientos.`,
+Publicar una investigación es creativo porque implica
+interpretar información, conectar ideas y generar
+conocimiento nuevo.`,
 
 "sorpresa.txt":
+`¿Por qué sorprende que sea considerado creativo?
 
-`PREGUNTA 2
-¿Por qué sorprende que sea considerado creativo?
-
-Muchas personas piensan que la investigación es un proceso
-puramente técnico o mecánico.
-
-Sin embargo, generar nuevas preguntas y nuevas formas
-de entender el mundo requiere imaginación, pensamiento
-crítico y creatividad.`,
+Muchas personas creen que investigar es solo aplicar
+métodos técnicos, pero formular preguntas nuevas
+requiere imaginación.`,
 
 "reflexion.txt":
+`¿Tengo yo ese comportamiento?
 
-`PREGUNTA 3
-¿Tengo yo ese comportamiento?
-
-Cuando aprendo o investigo intento no solo memorizar
-información, sino también conectar ideas y generar
-interpretaciones propias.
-
-Este proceso refleja precisamente el aspecto creativo
-de la investigación.`,
+Cuando aprendo intento no solo repetir información,
+sino también conectar ideas y generar interpretaciones propias.`,
 
 "pista.txt":
-
 `NOTA DEL SISTEMA
 
-Algunos archivos están ocultos.
+Un buen investigador siempre explora más allá
+de lo evidente.
 
-Un investigador siempre explora más allá de lo evidente.
+A veces hay información escondida.`
+};
 
-pista: intenta usar "ls -a"`,
+function render(){
 
-"easteregg.txt":
+document.getElementById("path").innerText=path;
 
-`ARCHIVO SECRETO
+let container=document.getElementById("files");
 
-Si encontraste este documento significa que
-exploraste más allá de lo necesario.
+container.innerHTML="";
 
-Eso es exactamente lo que hace un investigador.`
+filesystem[path].forEach(item=>{
+
+let div=document.createElement("div");
+
+div.className="item";
+
+if(item.type==="folder"){
+
+div.innerText="📁 "+item.name;
+
+div.onclick=()=>{
+
+path=(path=="/"?"/"+item.name:path+"/"+item.name);
+
+render();
 
 };
 
-const terminal=document.getElementById("terminal");
-const input=document.getElementById("input");
+}
 
-input.addEventListener("keydown",function(e){
+if(item.type==="file"){
 
-if(e.key==="Enter"){
+div.innerText="📄 "+item.name;
 
-let cmd=input.value.trim();
+div.onclick=()=>{
 
-terminal.innerHTML+="\n> "+cmd+"\n";
+document.getElementById("content").innerText=files[item.name];
 
-process(cmd);
-
-input.value="";
-
-terminal.scrollTop=terminal.scrollHeight;
+};
 
 }
+
+container.appendChild(div);
 
 });
 
-function process(cmd){
-
-let parts=cmd.split(" ");
-
-switch(parts[0]){
-
-case "help":
-
-terminal.innerHTML+=`
-AVAILABLE COMMANDS
-
-ls       list files
-ls -a    list all files
-cd       change directory
-cat      open file
-pwd      show current path
-help     show commands
-`;
-
-break;
-
-case "pwd":
-
-terminal.innerHTML+=path;
-
-break;
-
-case "ls":
-
-let showHidden=parts[1]=="-a";
-
-let list=filesystem[path]||[];
-
-if(!showHidden){
-
-list=list.filter(f=>!f.startsWith("."));
-
 }
 
-terminal.innerHTML+=list.join("   ");
-
-break;
-
-case "cd":
-
-let target=parts[1];
-
-if(!target){
-
-path="/";
-
-break;
-
-}
-
-let newPath=(path=="/"?"/"+target:path+"/"+target);
-
-if(filesystem[newPath]){
-
-path=newPath;
-
-}else{
-
-terminal.innerHTML+="directory not found";
-
-}
-
-break;
-
-case "cat":
-
-let file=parts[1];
-
-if(files[file]){
-
-terminal.innerHTML+=files[file];
-
-}else{
-
-terminal.innerHTML+="file not found";
-
-}
-
-break;
-
-default:
-
-terminal.innerHTML+="command not recognized";
-
-}
-
-}
+render();
 
 </script>
 
 </body>
+
 </html>
