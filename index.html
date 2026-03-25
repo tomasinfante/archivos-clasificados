@@ -3,7 +3,7 @@
 
 <head>
 
-<title>CLASSIFIED RESEARCH DATABASE</title>
+<title>RESTRICTED RESEARCH DATABASE</title>
 
 <style>
 
@@ -99,7 +99,7 @@ margin:10px 0;
 
 <div id="interface">
 
-<h2>CLASSIFIED RESEARCH DATABASE</h2>
+<h2>RESTRICTED RESEARCH DATABASE</h2>
 
 <div>
 <button onclick="goBack()">⬅ volver</button>
@@ -119,10 +119,10 @@ margin:10px 0;
 
 <script>
 
-/* BOOT SCREEN */
+/* BOOT */
 
 const bootText = `
-ACCESSING CLASSIFIED DATABASE...
+ACCESSING RESEARCH DATABASE...
 DECRYPTING FILES...
 VERIFYING CREDENTIALS...
 
@@ -153,6 +153,7 @@ render();
 boot();
 
 
+
 /* FILE SYSTEM */
 
 let path="/";
@@ -160,27 +161,28 @@ let path="/";
 const filesystem={
 
 "/":[
-{type:"folder",name:"archivos"},
+{type:"folder",name:"analisis"},
 {type:"folder",name:"investigacion"},
 {type:"folder",name:"laboratorio"},
 {type:"folder",name:"notas"},
 {type:"folder",name:"top_secret"}
 ],
 
-"/archivos":[
+"/analisis":[
 {type:"file",name:"creatividad.txt"},
 {type:"file",name:"sorpresa.txt"},
 {type:"file",name:"reflexion.txt"}
 ],
 
 "/investigacion":[
-{type:"file",name:"metodo.txt"},
-{type:"file",name:"observacion.txt"}
+{type:"file",name:"metodo.txt"}
 ],
 
 "/laboratorio":[
-{type:"file",name:"registro_01.txt"},
-{type:"file",name:"registro_02.txt"}
+{type:"pdf",name:"creatividad_investigacion.pdf"},
+{type:"pdf",name:"procesos_cognitivos.pdf"},
+{type:"pdf",name:"metodo_cientifico.pdf"},
+{type:"pdf",name:"interpretacion_datos.pdf"}
 ],
 
 "/notas":[
@@ -211,6 +213,7 @@ const filesystem={
 ]
 
 };
+
 
 
 /* FILE CONTENT */
@@ -264,8 +267,6 @@ intelectual.`,
 "reflexion.txt":
 `PREGUNTA 3
 
-PREGUNTA 3
-
 ¿Tengo yo ese comportamiento?
 
 Gran parte de mi carrera está orientada a investigar 
@@ -288,28 +289,27 @@ aunque anteriormente no lo identificaba
 como una forma de creatividad.`,
 
 "metodo.txt":
-`DOCUMENTO DE INVESTIGACIÓN
+`DOCUMENTO METODOLÓGICO
 
-La creatividad aparece cuando distintas ideas
-se conectan para generar nuevas explicaciones.`,
+En el proceso de publicar una investigación suele
+asumirse que el investigador simplemente aplica un
+método para obtener resultados objetivos.
 
-"observacion.txt":
-`OBSERVACIÓN
+Sin embargo, en muchas ocasiones el trabajo requiere
+desvincularse de percepciones o intuiciones previas
+y atender únicamente a los datos, modelos o ecuaciones
+que emergen del análisis.
 
-Los primeros algoritmos no fueron escritos
-para computadores electrónicos.
+Este distanciamiento obliga al investigador a dejar
+de lado interpretaciones iniciales y enfrentarse a
+los resultados tal como aparecen.
 
-Fueron imaginados por Ada Lovelace.`,
-
-"registro_01.txt":
-`REGISTRO DE LABORATORIO
-
-Exploración conceptual inicial.`,
-
-"registro_02.txt":
-`REGISTRO DE LABORATORIO
-
-Resultados preliminares.`,
+Paradójicamente, este proceso puede abrir un espacio
+para la creatividad, ya que comprender o interpretar
+datos inesperados requiere reformular preguntas,
+explorar nuevas relaciones conceptuales y construir
+explicaciones que no estaban previstas al inicio
+de la investigación.`,
 
 "pista.txt":
 `NOTA DEL SISTEMA
@@ -339,17 +339,12 @@ Proyecto identificado como ███████████.`,
 Programa real de la CIA iniciado en los años 50
 para investigar técnicas de control mental.
 
-Gran parte de los documentos fueron destruidos en 1973.
-
-Sujetos experimentales: █████████.`,
+Gran parte de los documentos fueron destruidos en 1973.`,
 
 "incidente.txt":
 `INCIDENTE DE ROSWELL – 1947
 
 Un objeto desconocido se estrelló en Nuevo México.
-
-El ejército declaró inicialmente haber recuperado
-un "disco volador".
 
 La explicación oficial posterior fue
 un globo del proyecto █████.`,
@@ -360,13 +355,10 @@ un globo del proyecto █████.`,
 Proyecto secreto de EE.UU. durante la Segunda Guerra Mundial
 para desarrollar la primera bomba atómica.
 
-Director científico: J. Robert Oppenheimer.
-
-Localización principal: Los Álamos.
-
-Partes del proyecto siguen clasificadas █████.`
+Director científico: J. Robert Oppenheimer.`
 
 };
+
 
 
 /* RENDER */
@@ -376,13 +368,11 @@ function render(){
 document.getElementById("path").innerText="Ruta actual: "+path;
 
 let container=document.getElementById("files");
-
 container.innerHTML="";
 
 filesystem[path].forEach(item=>{
 
 let div=document.createElement("div");
-
 div.className="item";
 
 if(item.name==="top_secret"){
@@ -410,9 +400,7 @@ return;
 }
 
 path=(path=="/"?"/"+item.name:path+"/"+item.name);
-
 document.getElementById("content").innerText="";
-
 render();
 
 };
@@ -425,6 +413,16 @@ div.innerText="📄 "+item.name;
 
 div.onclick=()=>{
 document.getElementById("content").innerText=files[item.name];
+};
+
+}
+
+if(item.type==="pdf"){
+
+div.innerText="📑 "+item.name;
+
+div.onclick=()=>{
+window.open(item.name,"_blank");
 };
 
 }
@@ -443,13 +441,11 @@ function goBack(){
 if(path=="/") return;
 
 let parts=path.split("/");
-
 parts.pop();
 
 path=parts.join("/") || "/";
 
 document.getElementById("content").innerText="";
-
 render();
 
 }
@@ -457,9 +453,7 @@ render();
 function goRoot(){
 
 path="/";
-
 document.getElementById("content").innerText="";
-
 render();
 
 }
@@ -467,5 +461,4 @@ render();
 </script>
 
 </body>
-
 </html>
